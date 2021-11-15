@@ -1,0 +1,10 @@
+{
+    "chromeWebSecurity" : "false",
+    "watchForFileChanges" : "false",
+    "video" : "false",
+    "env": 
+    {
+        "baseUrl" : "https://sim333.pythonanywhere.com/"
+        
+    }
+}

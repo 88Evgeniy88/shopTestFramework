@@ -1,0 +1,22 @@
+{
+  "name": "test-shop",
+  "version": "1.0.0",
+  "description": "framework-for-shop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/88Evgeniy88/shopTestFramework.git"
+  },
+  "author": "Evgeniy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/88Evgeniy88/shopTestFramework/issues"
+  },
+  "homepage": "https://github.com/88Evgeniy88/shopTestFramework#readme",
+  "dependencies": {
+    "cypress": "^9.0.0"
+  }
+}
