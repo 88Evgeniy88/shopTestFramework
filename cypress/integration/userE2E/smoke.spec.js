@@ -13,7 +13,7 @@ describe('TC 1', function(){
     })
 
     it('contains homepage', () => {
-        cy.contains('.alert', 'Вы вошли как Admin.').should('be.visible')
+        cy.contains('.alert', `Вы вошли как ${name}.`).should('be.visible')
 
         cy.get('section[class="py-4"]').as('form')
         cy.get('@form').find('div[class="card h-100"]').should('have.length', 4)
