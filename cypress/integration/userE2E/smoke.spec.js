@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import HomePage from '../../support/pageObj/homePage.js'
 import Category from '../../support/pageObj/categoryPage.js'
-import homePage from '../../support/pageObj/homePage.js'
+import itemPage from '../../support/pageObj/itemPage.js'
 import Cart from '../../support/pageObj/cart'
 
     

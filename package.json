@@ -4,7 +4,8 @@
   "description": "framework-for-shop",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "run": "npx cypress run --spec 'cypress/integration/userE2E/*.js'"
   },
   "repository": {
     "type": "git",
