@@ -1,11 +1,9 @@
 /// <reference types="cypress" />
 import HomePage from '../../support/pageObj/homePage.js'
 import Category from '../../support/pageObj/categoryPage.js'
-import homePage from '../../support/pageObj/homePage.js'
 import Cart from '../../support/pageObj/cart'
 
     
-
 describe('TC 1', function(){
     const sourseUrl = Cypress.env("baseUrl")
     const name = Cypress.env("name")
@@ -21,12 +19,13 @@ describe('TC 1', function(){
                     .should('be.visible')
                 });
         HomePage.getCartInNavbar('0').should('be.visible')        
-        cy.login(name, password)
+        cy.login(name, password, sourseUrl)
         
     })
 
     it('contains homepage', () => {
-        cy.contains('.alert', `Вы вошли как ${name}.`).should('be.visible')
+        cy.login(name, password, sourseUrl)
+        cy.visit(`${sourseUrl}`)
         cy.contains('b', 'Категории товаров').should('be.visible')
         HomePage.getCategory("Холодильники").should('be.visible')
         HomePage.getCategory("Телевизоры").should('be.visible')
@@ -39,9 +38,7 @@ describe('TC 1', function(){
     })
 
     it('contains item', () => {
-        cy.visit(`${sourseUrl}notebook`)
-        cy.login(name, password)
-        cy.getCookies()
+        cy.login(name, password, sourseUrl)
         cy.visit(`${sourseUrl}notebook`)
         
         Category.getAllItems().each(elem => {
@@ -62,9 +59,9 @@ describe('TC 1', function(){
         })
     
     it('cart', () => {
+        cy.login(name, password, sourseUrl)
         cy.visit(`${sourseUrl}`)
-        cy.login(name, password)
-        homePage.selectCartInNavbar()
+        HomePage.selectCartInNavbar()
         cy.get('.form-control').clear().type(2)
         cy.get('tr').find(':nth-child(3) > form').contains('Обновить').click()
         Cart.getSumPriceItem().then( getText => {
@@ -76,11 +73,15 @@ describe('TC 1', function(){
                 cy.wrap(resp).should('contain', sum)
             })
         })         
+    })    
+
+    it('clean cart', () =>{
+        cy.login(name, password, sourseUrl)
+        cy.visit(`${sourseUrl}`)
+        HomePage.selectCartInNavbar()
         cy.get(':nth-child(5) > .btn').click()   
         cy.contains('b', 'нет товара').should('exist')
         cy.contains('[href="/accounts/logout/"]', 'Выйти').should('be.visible').click()
-        cy.contains('button[type="submit"]', 'Выйти').click()
-        cy.contains('.alert', 'Вы вышли.').should('be.visible')
-    })    
-
+        cy.logout()
+    })
 })

@@ -2,6 +2,7 @@
     "chromeWebSecurity" : false,
     "watchForFileChanges" : false,
     "video" : false,
+    "experimentalSessionSupport" : true,
     "env": 
     {
         "baseUrl" : "https://sim333.pythonanywhere.com/",
