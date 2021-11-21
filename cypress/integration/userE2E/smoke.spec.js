@@ -64,7 +64,7 @@ describe('TC 1', function(){
         HomePage.selectCartInNavbar()
         cy.get('.form-control').clear().type(2)
         cy.get('tr').find(':nth-child(3) > form').contains('Обновить').click()
-        Cart.getSumPriceItem().then( getText => {
+        Cart.getSumPriceItem(0).then( getText => {
             const s = getText.text()
             const sum = s.replace(/\D/g, '');
             Cart.totalPrice().then( getText => {

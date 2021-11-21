@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 import Category from '../../support/pageObj/categoryPage.js'
+import HomePage from '../../support/pageObj/homePage.js'
 
 
 describe ('TC ItemPage', function(){
@@ -10,11 +11,11 @@ describe ('TC ItemPage', function(){
     it('item detail full check', () =>{
         cy.login(name, password, sourseUrl)
         cy.visit(`${sourseUrl}`)
-        cy.get('section[class="py-4"]').find('[class="col mb-5"]')
+        HomePage.getAllCategoty()
             .then(listing => {
             const len = Cypress.$(listing).length;
             for (var n = 0; n < len; n++){ 
-                cy.get('section[class="py-4"]').find('[class="col mb-5"]').eq(n)
+                HomePage.getAllCategoty().eq(n)
                     .contains('Перейти')
                     .click({forse: true})
 
@@ -38,9 +39,30 @@ describe ('TC ItemPage', function(){
                             })
                         }
                     })
-                cy.visit(`${sourseUrl}`)
+                
                 }    
             })       
+
+    })
+
+    it ('item search fild', () =>{
+        cy.login(name, password, sourseUrl)
+        cy.visit(`${sourseUrl}`)
+        HomePage.getAllCategoty()
+            .then(listing => {
+            const len = Cypress.$(listing).length;
+            for (var n = 0; n < len; n++){ 
+                HomePage.getAllCategoty().eq(n)
+                    .contains('Перейти')
+                    .click()
+                    Category.getAllItems().first().find('h5[class="fw-bolder"]').then( getText => {
+                        const text = getText.text()
+                        cy.get('[name="search"]').type(text).should('be.visible') 
+                        cy.contains('button', 'Искать').click()
+                        Category.getAllItems().first().find('h5[class="fw-bolder"]').should('have.text', text)
+                    })
+            }
+            })    
 
     })
 
