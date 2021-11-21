@@ -30,7 +30,7 @@ describe('TC Cart', function(){
 
     context('TC', function(){
 
-        deforeEach(() => {
+        beforeEach(() => {
             cy.login(name, password, sourseUrl)
             cy.visit(`${sourseUrl}`)
             HomePage.selectCartInNavbar()
@@ -46,8 +46,7 @@ describe('TC Cart', function(){
                         const s = getText.text()
                         const sum = s.replace(/\D/g, '');
                         total = total + Number(sum)  
-                    })
-                    
+                    })      
                 }
                 Cart.totalPrice().then( getText => {
                     const text = getText.text()
@@ -60,10 +59,14 @@ describe('TC Cart', function(){
         it('create buy', () => {
 
             cy.get('a.btn-primary').click()
-            cy.get('#id_name').type()
-            cy.get('#id_telephon').type()
-            cy.get('#id_address').type()
-            
+            cy.get('#id_name').type('name')
+            cy.get('#id_telephon').type('25-25-25')
+            cy.get('#id_address').type('USA')
+            cy.get('select').select('Доставка')
+            cy.contains('button', 'Оплатить').click()
+            cy.get('.alert > .text-center').should('have.text', 'Заказ успешно добавлен')
+            getCartInNavbar(0)
+
 
         })
 
