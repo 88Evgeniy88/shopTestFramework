@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
-import HomePage from '../../support/pageObj/homePage.js'
-import Category from '../../support/pageObj/categoryPage.js'
-import Cart from '../../support/pageObj/cart'
+import HomePage from '../support/pageObj/homePage.js'
+import Category from '../support/pageObj/categoryPage.js'
+import Cart from '../support/pageObj/cart'
 
     
 describe('TC 1', function(){

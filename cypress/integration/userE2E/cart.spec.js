@@ -4,7 +4,7 @@ import HomePage from '../../support/pageObj/homePage.js'
 import Cart from '../../support/pageObj/cart'
 
 
-describe('TC Cart', function(){
+describe('TC Shop cart', function(){
     const sourseUrl = Cypress.env("baseUrl")
     const name = Cypress.env("name")
     const password = Cypress.env("password")
@@ -28,7 +28,7 @@ describe('TC Cart', function(){
             })   
     })
 
-    context('TC', function(){
+    context('test case cart', function(){
 
         beforeEach(() => {
             cy.login(name, password, sourseUrl)
@@ -65,8 +65,7 @@ describe('TC Cart', function(){
             cy.get('select').select('Доставка')
             cy.contains('button', 'Оплатить').click()
             cy.get('.alert > .text-center').should('have.text', 'Заказ успешно добавлен')
-            getCartInNavbar(0)
-
+            HomePage.getCartInNavbar(0)
 
         })
 
