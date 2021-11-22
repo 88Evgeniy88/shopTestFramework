@@ -19,3 +19,12 @@ Cypress.Commands.add('logout', () => {
     cy.contains('button[type="submit"]', 'Выйти').click()
     cy.contains('.alert', 'Вы вышли.').should('be.visible')
 })
+
+Cypress.Commands.add('loginAdmin', (name, password, url) => {
+    cy.session([name, password], () => {
+        cy.visit(`${url}admin/login/`)
+        cy.get('#id_username').type(name)
+        cy.get('#id_password').type(password)
+        cy.contains('Войти').click()
+    })
+})

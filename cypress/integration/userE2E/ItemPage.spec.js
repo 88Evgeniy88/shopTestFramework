@@ -2,15 +2,23 @@
 import Category from '../../support/pageObj/categoryPage.js'
 import HomePage from '../../support/pageObj/homePage.js'
 
+const testEnv = require('../../fixtures/E2E.json')
 
 describe ('TC ItemPage', function(){
     const sourseUrl = Cypress.env("baseUrl")
-    const name = Cypress.env("name")
-    const password = Cypress.env("password")
+    const category = ['Ноутбуки','Холодильники','Телевизоры','Музыкальные центры']
+
+    beforeEach(()=>{
+        cy.login(testEnv[1].username, testEnv[1].password, sourseUrl)
+        cy.visit(`${sourseUrl}`)
+    })
+
+    after(() => {
+        cy.logout()
+    })
 
     it('item detail full check', () =>{
-        cy.login(name, password, sourseUrl)
-        cy.visit(`${sourseUrl}`)
+        
         HomePage.getAllCategoty()
             .then(listing => {
             const len = Cypress.$(listing).length;
@@ -24,10 +32,13 @@ describe ('TC ItemPage', function(){
                         const len = Cypress.$(listing).length;
                         for (var n = 0; n < len; n++ ){
                             Category.getAllItems().eq(n).then( elem => {
-                                cy.wrap(elem).contains('Перейти').click()
+                                cy.wrap(elem).find('div[class="text-center"]')
+                                    .contains('p', 'Остатки:').should('be.visible')
+                                cy.wrap(elem).find('div[class="text-center"]')
+                                    .contains('Перейти').click()
                                 cy.get('[class="text-center mt-5 mb-2"]').then((te) => {
                                     const text=te.text()
-                                    expect(text).to.be.oneOf(['Ноутбуки','Холодильники','Телевизоры','Музыкальные центры'])
+                                    expect(text).to.be.oneOf(category)
                                 })
                                     
                                 cy.get('p[class="card-text"]').first().should('not.be.empty')
@@ -46,8 +57,7 @@ describe ('TC ItemPage', function(){
     })
 
     it ('item search fild', () =>{
-        cy.login(name, password, sourseUrl)
-        cy.visit(`${sourseUrl}`)
+        
         HomePage.getAllCategoty()
             .then(listing => {
             const len = Cypress.$(listing).length;

@@ -5,7 +5,7 @@ import Cart from '../../support/pageObj/cart'
 
 
 describe('TC Shop cart', function(){
-    const testEnv = require('../../fixtures/env.json')
+    const testEnv = require('../../fixtures/E2E.json')
     const sourseUrl = Cypress.env("baseUrl")
     
 testEnv.forEach(test => {
