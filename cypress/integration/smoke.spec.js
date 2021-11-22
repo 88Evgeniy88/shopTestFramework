@@ -81,7 +81,6 @@ describe('TC 1', function(){
         HomePage.selectCartInNavbar()
         cy.get(':nth-child(5) > .btn').click()   
         cy.contains('b', 'нет товара').should('exist')
-        cy.contains('[href="/accounts/logout/"]', 'Выйти').should('be.visible').click()
         cy.logout()
     })
 })

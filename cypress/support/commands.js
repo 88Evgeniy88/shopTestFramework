@@ -15,6 +15,7 @@ Cypress.Commands.add('login', (name, password, url) => {
 })
 
 Cypress.Commands.add('logout', () => {
+    cy.contains('[href="/accounts/logout/"]', 'Выйти').should('be.visible').click()
     cy.contains('button[type="submit"]', 'Выйти').click()
     cy.contains('.alert', 'Вы вышли.').should('be.visible')
 })
