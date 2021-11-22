@@ -5,12 +5,13 @@ import Cart from '../../support/pageObj/cart'
 
 
 describe('TC Shop cart', function(){
+    const testEnv = require('../../fixtures/env.json')
     const sourseUrl = Cypress.env("baseUrl")
-    const name = Cypress.env("name")
-    const password = Cypress.env("password")
+    
+testEnv.forEach(test => {
 
     it('Pre-conditions', () => {
-        cy.login(name, password, sourseUrl)
+        cy.login(test.username, test.password, sourseUrl)
         cy.visit(`${sourseUrl}`)
         HomePage.getAllCategoty()
             .then(listing => {
@@ -25,54 +26,51 @@ describe('TC Shop cart', function(){
                     cy.contains('В корзину').click()
                     cy.visit(`${sourseUrl}`)    
             }
-            })   
+        })   
     })
 
-    context('test case cart', function(){
+})
+  
+testEnv.forEach(test => {
+    it('cart math', () => {
+        cy.login(test.username, test.password, sourseUrl)
+        cy.visit(`${sourseUrl}`)
+        HomePage.selectCartInNavbar()    
+        let total = 0
+        cy.get('tbody').find('tr').then(listing => {
+            const len = Cypress.$(listing).length;
+            for ( let i = 0; i < len; i++ ){
+                Cart.getSumPriceItem(i).should('be.visible').then( getText => {
+                    const s = getText.text()
+                    const sum = s.replace(/\D/g, '');
+                    total = total + Number(sum)  
+                })      
+            }
+            Cart.totalPrice().then( getText => {
+                const text = getText.text()
+                const resp = text.replace(/\D/g, '');
+                cy.wrap(Number(resp)).should('be.equal', total)    
+            })
+        })        
+    })
+})
 
-        beforeEach(() => {
-            cy.login(name, password, sourseUrl)
-            cy.visit(`${sourseUrl}`)
-            HomePage.selectCartInNavbar()
-        })
-
-        it('cart math', () => {
-            
-            let total = 0
-            cy.get('tbody').find('tr').then(listing => {
-                const len = Cypress.$(listing).length;
-                for ( let i = 0; i < len; i++ ){
-                    Cart.getSumPriceItem(i).should('be.visible').then( getText => {
-                        const s = getText.text()
-                        const sum = s.replace(/\D/g, '');
-                        total = total + Number(sum)  
-                    })      
-                }
-                Cart.totalPrice().then( getText => {
-                    const text = getText.text()
-                    const resp = text.replace(/\D/g, '');
-                    cy.wrap(Number(resp)).should('be.equal', total)    
-                })
-            })        
-        })
-
-        it('create buy', () => {
-
-            cy.get('a.btn-primary').click()
-            cy.get('#id_name').type('name')
-            cy.get('#id_telephon').type('25-25-25')
-            cy.get('#id_address').type('USA')
-            cy.get('select').select('Доставка')
-            cy.contains('button', 'Оплатить').click()
-            cy.get('.alert > .text-center').should('have.text', 'Заказ успешно добавлен')
-            HomePage.getCartInNavbar(0)
-
-        })
+testEnv.forEach(test => {
+    it('create buy', () => {
+        cy.login(test.username, test.password, sourseUrl)
+        cy.visit(`${sourseUrl}`)
+        HomePage.selectCartInNavbar() 
+        cy.get('a.btn-primary').click()
+        cy.get('#id_name').type('name')
+        cy.get('#id_telephon').type('25-25-25')
+        cy.get('#id_address').type('USA')
+        cy.get('select').select('Доставка')
+        cy.contains('button', 'Оплатить').click()
+        cy.get('.alert > .text-center').should('have.text', 'Заказ успешно добавлен')
+        HomePage.getCartInNavbar(0)
+        cy.logout()
 
     })
-
-
-    
-
-    
+})
+   
 })
