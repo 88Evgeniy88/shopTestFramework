@@ -9,7 +9,7 @@ describe('Admin tc', function(){
 
     beforeEach(() => {
         cy.loginAdmin(testEnv[0].username, testEnv[0].password, sourseUrl)
-        cy.visit(`${sourseUrl}admin/login/`)
+        cy.visit(`${sourseUrl}/admin/login/`)
     })
 
     it('CHECK category', () => {

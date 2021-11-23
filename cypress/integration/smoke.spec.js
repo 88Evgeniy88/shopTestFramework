@@ -39,7 +39,7 @@ describe('TC smoke', function(){
 
     it('Contains item', () => {
         cy.login(name, password, sourseUrl)
-        cy.visit(`${sourseUrl}notebook`)
+        cy.visit(`${sourseUrl}/notebook`)
         
         Category.getAllItems().each(elem => {
             cy.wrap(elem)
