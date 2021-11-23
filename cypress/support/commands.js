@@ -1,6 +1,6 @@
 Cypress.Commands.add('login', (name, password, url) => {
     cy.session([name, password], () => {
-        cy.visit(`${url}accounts/login/`)
+        cy.visit(`${url}/accounts/login/`)
         cy.get('#id_login')
         .clear()
         .type(name)
@@ -22,7 +22,7 @@ Cypress.Commands.add('logout', () => {
 
 Cypress.Commands.add('loginAdmin', (name, password, url) => {
     cy.session([name, password], () => {
-        cy.visit(`${url}admin/login/`)
+        cy.visit(`${url}/admin/login/`)
         cy.get('#id_username').type(name)
         cy.get('#id_password').type(password)
         cy.contains('Войти').click()
