@@ -17,7 +17,7 @@ describe ('TC ItemPage', function(){
         cy.logout()
     })
 
-    it('item detail full check', () =>{
+    it('Item detail full check', () =>{
         
         HomePage.getAllCategoty()
             .then(listing => {
@@ -56,7 +56,7 @@ describe ('TC ItemPage', function(){
 
     })
 
-    it ('item search fild', () =>{
+    it ('Check item search fild', () =>{
         
         HomePage.getAllCategoty()
             .then(listing => {
@@ -73,8 +73,6 @@ describe ('TC ItemPage', function(){
                     })
             }
             })    
-
     })
-
 })
     

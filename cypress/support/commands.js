@@ -28,3 +28,5 @@ Cypress.Commands.add('loginAdmin', (name, password, url) => {
         cy.contains('Войти').click()
     })
 })
+
+import 'cypress-file-upload';

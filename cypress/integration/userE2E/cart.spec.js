@@ -32,7 +32,7 @@ testEnv.forEach(test => {
 })
   
 testEnv.forEach(test => {
-    it('cart math', () => {
+    it('Cart math', () => {
         cy.login(test.username, test.password, sourseUrl)
         cy.visit(`${sourseUrl}`)
         HomePage.selectCartInNavbar()    
@@ -56,7 +56,7 @@ testEnv.forEach(test => {
 })
 
 testEnv.forEach(test => {
-    it('create buy', () => {
+    it('Create new buy', () => {
         cy.login(test.username, test.password, sourseUrl)
         cy.visit(`${sourseUrl}`)
         HomePage.selectCartInNavbar() 

@@ -4,12 +4,12 @@ import Category from '../support/pageObj/categoryPage.js'
 import Cart from '../support/pageObj/cart'
 
     
-describe('TC 1', function(){
+describe('TC smoke', function(){
     const sourseUrl = Cypress.env("baseUrl")
     const name = Cypress.env("name")
     const password = Cypress.env("password")
 
-    it('navbar and login', () => {
+    it('Check Navbar and login', () => {
         cy.visit(`${sourseUrl}`)
         cy.contains('.nav-item', 'Помощь')
             .should('be.visible').click().then( help => {
@@ -23,7 +23,7 @@ describe('TC 1', function(){
         
     })
 
-    it('contains homepage', () => {
+    it('Contains homepage', () => {
         cy.login(name, password, sourseUrl)
         cy.visit(`${sourseUrl}`)
         cy.contains('b', 'Категории товаров').should('be.visible')
@@ -37,7 +37,7 @@ describe('TC 1', function(){
                 })
     })
 
-    it('contains item', () => {
+    it('Contains item', () => {
         cy.login(name, password, sourseUrl)
         cy.visit(`${sourseUrl}notebook`)
         
@@ -58,7 +58,7 @@ describe('TC 1', function(){
             })
         })
     
-    it('cart', () => {
+    it('Cart', () => {
         cy.login(name, password, sourseUrl)
         cy.visit(`${sourseUrl}`)
         HomePage.selectCartInNavbar()
@@ -75,7 +75,7 @@ describe('TC 1', function(){
         })         
     })    
 
-    it('clean cart', () =>{
+    it('Clean cart', () =>{
         cy.login(name, password, sourseUrl)
         cy.visit(`${sourseUrl}`)
         HomePage.selectCartInNavbar()
