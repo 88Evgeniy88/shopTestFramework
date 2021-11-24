@@ -8,7 +8,6 @@
     "user": "npx cypress run --spec 'cypress/integration/userE2E/*.js'",
     "smoke": "npx cypress run --spec 'cypress/integration/smoke.spec.js'",
     "user=QA": "npx cypress run --spec 'cypress/integration/userE2E/*.js' --env baseUrl=https://sim333.pythonanywhere.com"
-
   },
   "repository": {
     "type": "git",
