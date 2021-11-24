@@ -1,2 +1,2 @@
 # shopTestFramework
-Framework to CI for website
+Framework  for website
