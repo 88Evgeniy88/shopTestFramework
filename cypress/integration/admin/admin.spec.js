@@ -32,7 +32,7 @@ describe('Admin tc', function(){
     it('ADD product', () => {
         take()
         cy.contains('[class="addlink"]', 'Добавить ноутбук').click()
-        cy.get('[class="related-widget-wrapper"]').find('select[id="id_category"]').select('Ноутбуки') 
+        cy.get('[class="related-widget-wrapper"]').find('select[id="id_category"]').select(fild.category) 
         cy.get('[id="id_title"]').type(fild.title)
         cy.get('[id="id_description"]').type(fild.description)
         cy.get('[id="id_price"]').type(fild.price)
@@ -66,9 +66,9 @@ describe('Admin tc', function(){
 
     it('DELETE new product', () => {
         take()
-        cy.get('div[id="content"]').find('tbody').find('tr').first().as('tr')
+        cy.get('div[id="content"]').find('tbody').contains('tr', fild.title).as('tr')
         cy.get('@tr').find('input[class="action-select"]').check()
-        cy.get('div[class="actions"]').find('select').select('Удалить выбранные ноутбуки') 
+        cy.get('div[class="actions"]').find('select').select(`Удалить выбранные ${(fild.category).toLowerCase()}`) 
         cy.contains('button', "Выполнить").click()   
         cy.contains('input', "Да, я уверен").click()
         cy.get('div[id="content"]').find('tbody').find('tr').first().as('tr')
