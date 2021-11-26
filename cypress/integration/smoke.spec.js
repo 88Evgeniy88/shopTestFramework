@@ -8,6 +8,9 @@ describe('TC smoke', function(){
     const sourseUrl = Cypress.env("baseUrl")
     const name = Cypress.env("name")
     const password = Cypress.env("password")
+    const category = ['Холодильники','Телевизоры','Музыкальные центры', 'Ноутбуки']
+
+    
 
     it('Check Navbar and login', () => {
         cy.visit(`${sourseUrl}`)
@@ -23,10 +26,12 @@ describe('TC smoke', function(){
         
     })
 
-    it('Contains homepage', () => {
+    it('Contains element in homepage', () => {
         cy.login(name, password, sourseUrl)
         cy.visit(`${sourseUrl}`)
         cy.contains('b', 'Категории товаров').should('be.visible')
+
+
         HomePage.getCategory("Холодильники").should('be.visible')
         HomePage.getCategory("Телевизоры").should('be.visible')
         HomePage.getCategory("Музыкальные центры").should('be.visible')
@@ -37,7 +42,7 @@ describe('TC smoke', function(){
                 })
     })
 
-    it('Contains item', () => {
+    it('Contains element in item list', () => {
         cy.login(name, password, sourseUrl)
         cy.visit(`${sourseUrl}/notebook`)
         

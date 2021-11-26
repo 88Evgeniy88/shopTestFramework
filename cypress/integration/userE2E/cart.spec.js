@@ -8,11 +8,16 @@ describe('TC Shop cart', function(){
     const testEnv = require('../../fixtures/E2E.json')
     const sourseUrl = Cypress.env("baseUrl")
     
-testEnv.forEach(test => {
-
-    it('Pre-conditions', () => {
+    function each(test) {
         cy.login(test.username, test.password, sourseUrl)
         cy.visit(`${sourseUrl}`)
+        return this
+    }
+
+testEnv.forEach(test => {
+    
+    it('Pre-conditions', () => {
+        each(test)
         HomePage.getAllCategoty()
             .then(listing => {
             const len = Cypress.$(listing).length;
@@ -21,8 +26,13 @@ testEnv.forEach(test => {
                     .contains('Перейти')
                     .click({forse:true})
                     
+                if (test.id == 1 ){
                     Category.getAllItems().first()
                         .find('[class="btn btn-outline-dark mt-auto"]').click()
+                }
+                else {Category.getAllItems().last()
+                    .find('[class="btn btn-outline-dark mt-auto"]').click()}
+
                     cy.contains('В корзину').click()
                     cy.visit(`${sourseUrl}`)    
             }
@@ -32,9 +42,8 @@ testEnv.forEach(test => {
 })
   
 testEnv.forEach(test => {
-    it('Cart math', () => {
-        cy.login(test.username, test.password, sourseUrl)
-        cy.visit(`${sourseUrl}`)
+     it('Cart math', () => {
+        each(test) 
         HomePage.selectCartInNavbar()    
         let total = 0
         cy.get('tbody').find('tr').then(listing => {
@@ -57,8 +66,7 @@ testEnv.forEach(test => {
 
 testEnv.forEach(test => {
     it('Create new buy', () => {
-        cy.login(test.username, test.password, sourseUrl)
-        cy.visit(`${sourseUrl}`)
+        each(test) 
         HomePage.selectCartInNavbar() 
         cy.get('a.btn-primary').click()
         cy.get('#id_name').type('name')
