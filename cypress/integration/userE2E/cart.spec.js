@@ -27,8 +27,7 @@ testEnv.forEach(test => {
             for (let n = 0; n < len; n++){ 
                 HomePage.getAllCategoty().eq(n)
                     .contains('Перейти')
-                    .click({forse:true})
-                    
+                    .click({forse:true})    
                 if (test.id == 1 ){
                     Category.getAllItems().first()
                         .find('[class="btn btn-outline-dark mt-auto"]').click()
@@ -41,7 +40,6 @@ testEnv.forEach(test => {
             }
         })   
     })
-
 })
   
 testEnv.forEach(test => {
