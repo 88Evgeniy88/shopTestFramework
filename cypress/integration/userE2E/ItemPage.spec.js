@@ -17,37 +17,38 @@ describe ('TC ItemPage', function(){
     })
 
     it('Item detail full check', () =>{
-        
         HomePage.getAllCategoty()
             .then(listing => {
             const len = Cypress.$(listing).length;
             for (var n = 0; n < len; n++){ 
-                HomePage.getAllCategoty().eq(n)
+                HomePage.getAllCategoty()
+                    .eq(n)
                     .contains('Перейти')
                     .click({forse: true})
-
                     Category.getAllItems()
                         .then(listing => {
                         const len = Cypress.$(listing).length;
                         for (var n = 0; n < len; n++ ){
                             Category.getAllItems().eq(n).then( elem => {
-                                cy.wrap(elem).find('div[class="text-center"]')
+                                cy.wrap(elem)
+                                    .find('div[class="text-center"]')
                                     .contains('p', 'Остатки:')
                                     .should('be.visible')
                                 cy.wrap(elem)
                                     .find('div[class="text-center"]')
                                     .contains('Перейти').click()
-                                cy.get('[class="text-center mt-5 mb-2"]').then((te) => {
-                                    const text=te.text()
+                                cy.get('[class="text-center mt-5 mb-2"]').then((t) => {
+                                    const text=t.text()
                                     expect(text).to.be.oneOf(category)
                                 })
-                                    
                                 cy.get('p[class="card-text"]')
                                     .first()
                                     .should('not.be.empty')
                                 cy.contains('b', 'подробнее...').click({forse : true})
-                                cy.get('tbody > tr').each( el => {
-                                    cy.wrap(el).find('td').should('not.be.empty')
+                                cy.get('tbody > tr').each(el => {
+                                    cy.wrap(el)
+                                        .find('td')
+                                        .should('not.be.empty')
                                     })
                                 cy.go('back')
                             })
@@ -60,7 +61,6 @@ describe ('TC ItemPage', function(){
     })
 
     it ('Check item search fild', () => {
-        
         HomePage.getAllCategoty()
             .then(listing => {
             const len = Cypress.$(listing).length;
@@ -68,7 +68,10 @@ describe ('TC ItemPage', function(){
                 HomePage.getAllCategoty().eq(n)
                     .contains('Перейти')
                     .click()
-                    Category.getAllItems().first().find('h5[class="fw-bolder"]').then(getText => {
+                    Category.getAllItems()
+                        .first()
+                        .find('h5[class="fw-bolder"]')
+                        .then(getText => {
                         const text = getText.text()
                         cy.get('[name="search"]')
                             .type(text)
