@@ -2,6 +2,13 @@
     "chromeWebSecurity" : false,
     "watchForFileChanges" : false,
     "video" : false,
+    "reporter": "cypress-mochawesome-reporter",
+    "reporterOptions": {
+        "reportDir": "cypress/report",
+        "charts": true,
+        "reportPageTitle": "Report test",
+        "embeddedScreenshots" : true
+      },
     "experimentalSessionSupport" : true,
     "viewportHeight" : 900,
     "viewportWidth": 1600

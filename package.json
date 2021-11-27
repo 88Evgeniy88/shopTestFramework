@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "cypress-file-upload": "^5.0.8",
+    "cypress-mochawesome-reporter": "^2.3.0",
     "faker": "^5.5.3"
   }
 }
