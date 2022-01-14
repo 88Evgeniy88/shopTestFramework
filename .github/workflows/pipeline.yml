@@ -11,10 +11,10 @@ on:
 jobs:
   build_testing:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Run a one-line script
-        run: echo "Hello, world!"
+      - name: Git clone my repo 
+        uses: actions/checkout@v1
 
       - name: Run a multi-line script
         run: |
