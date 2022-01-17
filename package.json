@@ -4,7 +4,10 @@
   "description": "framework-for-shop",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "user": "npx cypress run --spec 'cypress/integration/userE2E/*.js'",
+    "smoke": "npx cypress run --spec 'cypress/integration/smoke.spec.js'",
+    "user=QA": "npx cypress run --spec 'cypress/integration/userE2E/*.js' --env baseUrl=https://sim333.pythonanywhere.com"
   },
   "repository": {
     "type": "git",
@@ -18,5 +21,10 @@
   "homepage": "https://github.com/88Evgeniy88/shopTestFramework#readme",
   "dependencies": {
     "cypress": "^9.0.0"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8",
+    "cypress-mochawesome-reporter": "^2.3.0",
+    "faker": "^5.5.3"
   }
 }

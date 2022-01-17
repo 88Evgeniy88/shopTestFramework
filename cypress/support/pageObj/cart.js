@@ -1,7 +1,7 @@
 class Cart {
 
-    getSumPriceItem (){
-        return cy.get('tbody > tr').first().find(':nth-child(4)')
+    getSumPriceItem(n){
+        return cy.get('tbody > tr').eq(n).find(':nth-child(4)')
     }
 
     totalPrice (){
