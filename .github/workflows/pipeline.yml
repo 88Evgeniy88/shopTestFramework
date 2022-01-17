@@ -5,7 +5,9 @@ name: My-CI/CD
 on:
   pull_request:
     branches: [ master ]
-
+  push:
+    branches: [ master ]
+    
 jobs:
   build_testing:
     runs-on: ubuntu-latest
