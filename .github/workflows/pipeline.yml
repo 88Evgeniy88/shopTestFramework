@@ -1,0 +1,19 @@
+# GitHub workflow 
+
+name: My-CI/CD
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build_testing:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Git clone my repo 
+        uses: actions/checkout@v2.4.0
+      - name: Cypress.io
+        uses: cypress-io/github-action@v2.9.7
+        with:
+          start: npx cypress run
