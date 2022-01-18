@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/88Evgeniy88/shopTestFramework#readme",
   "dependencies": {
-    "cypress": "^9.0.0"
+    "cypress": "^9.2.1"
   },
   "devDependencies": {
     "cypress-file-upload": "^5.0.8",
