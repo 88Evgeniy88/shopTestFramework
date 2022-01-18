@@ -2,14 +2,14 @@
     "chromeWebSecurity" : false,
     "watchForFileChanges" : false,
     "video" : false,
+    "reporter": "cypress-mochawesome-reporter",
+    "reporterOptions": {
+        "reportDir": "cypress/report",
+        "charts": true,
+        "reportPageTitle": "Report test",
+        "embeddedScreenshots" : true
+      },
     "experimentalSessionSupport" : true,
-    "env": 
-    {
-        "baseUrl" : "https://sim333.pythonanywhere.com/",
-        "name": "Admin",
-        "password": "qwert156"
-        
-    },
     "viewportHeight" : 900,
     "viewportWidth": 1600
 }

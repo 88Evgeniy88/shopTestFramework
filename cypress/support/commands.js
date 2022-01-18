@@ -1,6 +1,6 @@
 Cypress.Commands.add('login', (name, password, url) => {
     cy.session([name, password], () => {
-        cy.visit(`${url}accounts/login/`)
+        cy.visit(`${url}/accounts/login/`)
         cy.get('#id_login')
         .clear()
         .type(name)
@@ -15,6 +15,18 @@ Cypress.Commands.add('login', (name, password, url) => {
 })
 
 Cypress.Commands.add('logout', () => {
+    cy.contains('[href="/accounts/logout/"]', 'Выйти').should('be.visible').click()
     cy.contains('button[type="submit"]', 'Выйти').click()
     cy.contains('.alert', 'Вы вышли.').should('be.visible')
 })
+
+Cypress.Commands.add('loginAdmin', (name, password, url) => {
+    cy.session([name, password], () => {
+        cy.visit(`${url}/admin/login/`)
+        cy.get('#id_username').type(name)
+        cy.get('#id_password').type(password)
+        cy.contains('Войти').click()
+    })
+})
+
+import 'cypress-file-upload';
