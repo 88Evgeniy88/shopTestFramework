@@ -58,9 +58,9 @@ testEnv.forEach(test => {
                 }
                 else {Category.getAllItems()
                     .last()
-                    .find('[class="btn btn-outline-dark mt-auto"]').click()}
+                    .find('[class="btn btn-outline-dark mt-auto"]').click()
                     cy.contains('В корзину').click()
-                    cy.visit(`${sourseUrl}`)    
+                    cy.visit(`${sourseUrl}`)}    
             }
         })   
     })

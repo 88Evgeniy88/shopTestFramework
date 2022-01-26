@@ -100,9 +100,8 @@ describe('Admin tc', function(){
         cy.get('@tr')
             .find('td[class="field-title"]')
             .should('not.have.text', fild.title).then(() => {
-                        cy.get('[class="success"]')
-                        .contains('Успешно удалены 1 ноутбук')
-                        .should('be.visible')})
+                // TO DO
+            })
         
     })
 })
